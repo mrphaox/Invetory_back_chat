@@ -1,0 +1,211 @@
+### 📝 REGISTRO DE USUARIO
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "oscar@email.com",
+  "password": "123456"
+}
+
+### 🔑 LOGIN DE USUARIO
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "lucia@email.com",
+  "password": "123456"
+}
+
+
+### 🔐 OBTENER PERFIL (Necesita Token)
+GET http://localhost:3000/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwic3ViIjoiNjdkNjVlNjZhMTc5MmJjZTZhMjVhNTljIiwiaWF0IjoxNzQyMTExMTY3LCJleHAiOjE3NDIxMTQ3Njd9.deorLF1zsq1PdfFgmuNdKXoRrHwfe9f-KW1uwMiHMpY
+
+### ENVIAR MENSAJE
+POST http://localhost:3000/chat/send
+Content-Type: application/json
+
+{
+  "sender": "67d671c2be2843c7511338ca",
+  "receiver": "67d65e66a1792bce6a25a59c",
+  "content": "Hola! Cómo estás?"
+}
+
+###
+
+### 🖼 SUBIR ARCHIVO
+POST http://localhost:3000/chat/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+Content-Disposition: form-data; name="file"; filename="imagen.jpg"
+
+< ./imagen.jpg
+
+### ✏ EDITAR MENSAJE
+POST http://localhost:3000/chat/update
+Content-Type: application/json
+
+{
+  "id": "67d67a5cae8d16696f994d47",
+  "content": "Hola mundo editado!"
+}
+
+###
+
+### 🗑 ELIMINAR MENSAJE
+POST http://localhost:3000/chat/remove
+Content-Type: application/json
+
+{
+  "id": "67d67a5cae8d16696f994d47"
+}
+
+### 📜 OBTENER TODOS LOS MENSAJES
+GET http://localhost:3000/chat/all
+
+### 💬 OBTENER CONVERSACIÓN ENTRE DOS USUARIOS
+GET http://localhost:3000/chat/conversation/67d671c2be2843c7511338ca/67d65e66a1792bce6a25a59c
+
+### notificacion
+POST http://localhost:3000/notifications/send
+Content-Type: application/json
+
+{
+  "userId": "67d671c2be2843c7511338ca",
+  "type": "message",
+  "content": "Nuevo mensaje recibido!"
+}
+###
+GET http://localhost:3000/notifications/67d671c2be2843c7511338ca
+
+###publicacion
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "userId": "67d65e66a1792bce6a25a59c",
+  "content": "¡Hola, este es mi primer post!"
+}
+
+
+### like postID like userID
+POST http://localhost:3000/posts/67d68660e87c2ce9c986f5c7/like/67d671c2be2843c7511338ca
+
+### all post 
+GET http://localhost:3000/posts
+
+### comentario
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+  "postId": "67d68629e87c2ce9c986f5c4",
+  "userId": "67d65e66a1792bce6a25a59c",
+  "content": "Este es un comentario de prueba!"
+}
+
+### buscar 
+GET http://localhost:3000/comments/post/67d68629e87c2ce9c986f5c4
+
+
+### editar comentario 
+PUT http://localhost:3000/comments
+Content-Type: application/json
+
+{
+  "id": "67d68b2cb454ad7297834eae",
+  "content": "Comentario editado!"
+}
+
+### eliminar
+DELETE http://localhost:3000/comments/67d68b2cb454ad7297834eae
+
+### create product
+POST http://localhost:3000/inventory
+Content-Type: application/json
+
+{
+  "name": "Laptop Gamer",
+  "type": "Electrónica",
+  "price": 1500,
+  "stock": 10,
+  "warehouseId": "ID_DE_BODEGA"
+}
+
+### all productos
+GET http://localhost:3000/inventory
+
+### actualizar product 
+PUT http://localhost:3000/inventory/67d75735f13573c68d5ffdfb
+Content-Type: application/json
+
+{
+  "stock": 15
+}
+
+### eliminar producto
+DELETE http://localhost:3000/inventory/67d75735f13573c68d5ffdfb
+
+###crear warehouse
+POST http://localhost:3000/warehouses
+Content-Type: application/json
+
+{
+  "name": "Bodega Central2",
+  "location": "Ciudad X",
+  "employees": ["67d76a7d7469d65ef1f26b5b"]
+}
+
+
+###editar warehouse
+PUT http://localhost:3000/warehouses/67d76aae7469d65ef1f26b62
+Content-Type: application/json
+
+{
+  "location": "Nueva ubicación"
+}
+
+
+###all warehouse
+GET http://localhost:3000/warehouses
+
+
+###eliminar warehouse
+DELETE http://localhost:3000/warehouses/67d76aae7469d65ef1f26b62
+
+### register un employed
+POST http://localhost:3000/employees/register
+Content-Type: application/json
+
+{
+  "email": "empleado3@empresa.com",
+  "password": "123456",
+  "name": "Juan Péreza",
+  "warehouseId": "67d76aae7469d65ef1f26b62",
+  "role": "employee"
+}
+
+
+### login de employed
+POST http://localhost:3000/employees/login
+Content-Type: application/json
+
+{
+  "email": "empleado1@empresa.com",
+  "password": "123456"
+}
+
+
+### all employed
+GET http://localhost:3000/employees
+
+### update employed
+PUT http://localhost:3000/employees/67d76a7d7469d65ef1f26b5b
+Content-Type: application/json
+
+{
+  "name": "Juan Pérez Actualizado"
+}
+
+### delet employed
+DELETE http://localhost:3000/employees/ID_DEL_EMPLEADO
+
