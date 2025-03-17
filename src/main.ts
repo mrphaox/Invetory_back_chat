@@ -13,24 +13,24 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   app.useGlobalPipes(new ValidationPipe());
-  app.useStaticAssets(join(__dirname,'..','uploads'));
+  app.useStaticAssets(join(__dirname, '..', 'uploads'));
 
+  // Llamada única para habilitar CORS
   app.enableCors({
     origin: 'http://localhost:4200',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-  app.enableCors({
-    origin: 'http://localhost:4200',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  });
+
   const config = new DocumentBuilder()
-  .setTitle('API de Inventario y Chat')
-  .setDescription('Documentación de la API con Swagger')
-  .setVersion('1.0')
-  .addBearerAuth() // Permite autenticación con JWT en Swagger
-  .build();
+    .setTitle('API de Inventario y Chat')
+    .setDescription('Documentación de la API con Swagger')
+    .setVersion('1.0')
+    .addBearerAuth() // Permite autenticación con JWT en Swagger
+    .build();
+
+  // Aquí podrías inicializar Swagger si lo necesitas:
+  // SwaggerModule.setup('api', app, SwaggerModule.createDocument(app, config));
 
   await app.listen(port);
   console.log(`\x1b[32m[Nest] 🚀 Application is running on: http://localhost:${port}\x1b[0m`);
